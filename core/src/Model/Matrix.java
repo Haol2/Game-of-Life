@@ -24,6 +24,13 @@ public class Matrix {
         return n;
     }
 
+    public void step() {
+        for (int i = 0; i < cells.size(); i++) {
+            for (int j = 0; i < cells.get(0).size(); j++) {
+                
+            }
+        }
+    }
     public ArrayList<ArrayList<Cell>> getCells() {
         return cells;
     }

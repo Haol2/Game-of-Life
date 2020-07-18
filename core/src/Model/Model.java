@@ -7,12 +7,9 @@ public class Model {
         this.matrix = matrix;
     }
 
-    /*
-    addObserver
-    public void notify() {
-
+    public void step() {
+        matrix.step();
     }
-*/
 
     public void setMatrix(Matrix matrix) {
         this.matrix = matrix;
