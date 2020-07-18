@@ -7,8 +7,12 @@ public class Cell {
         this.isAlive = isAlive;
     }
 
-    public void setAlive(boolean alive) {
-        isAlive = alive;
+    public void setAlive() {
+        isAlive = true;
+    }
+
+    public void setDead() {
+        isAlive = false;
     }
 
     public boolean isAlive() {
