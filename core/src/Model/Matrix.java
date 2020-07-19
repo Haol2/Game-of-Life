@@ -6,22 +6,25 @@ public class Matrix {
     private ArrayList<ArrayList<Cell>> cells;
 
     public Matrix(int x, int y) {
-        cells = new ArrayList<ArrayList<Cell>>(x);
-        for (ArrayList<Cell> i : cells) i = new ArrayList<Cell>(y);
+        cells = new ArrayList<ArrayList<Cell>>(y);
+        for (ArrayList<Cell> i : cells) i = new ArrayList<Cell>(x);
     }
 
     public int neighborsAlive(int x, int y) {
-        //bitte ändern
         int n = 0;
-        for (int i = 0; i < cells.size(); ++i) {
-            for (int j = 0; j < cells.get(0).size(); ++j) {
-                if (Math.abs(x-i) < 2 && Math.abs(y-j) < 2) {
+        int sizex = cells.get(0).size();
+        int sizey = cells.size();
+
+        for (int i = x-1; i <= x+1; i++) {
+            for (int j = y-1; j <= y+1; j++) {
+                if (!(i < 0 && j < 0 && i > sizex-1 && j > sizey-1)) {
                     if (!(i == x && j == y)) {
-                        if (cells.get(i).get(j).isAlive()) ++n;
+                        if (cells.get(j).get(i).isAlive()) n++;
                     }
                 }
             }
         }
+
         return n;
     }
 
@@ -61,6 +64,7 @@ public class Matrix {
             }
         }
     }
+
     public ArrayList<ArrayList<Cell>> getCells() {
         return cells;
     }
