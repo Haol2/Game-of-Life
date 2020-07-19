@@ -1,6 +1,4 @@
-package com.haol.gameoflife.Model;
-
-import java.util.ArrayList;
+package com.haol.gameoflife.model;
 
 public class Matrix {
     private Cell[][] cells;
@@ -36,7 +34,7 @@ public class Matrix {
         Cell[][] newCells = cells;
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; i < cells[0].length; j++) {
-                current = newCells[j][i]);
+                current = newCells[j][i];
                 switch (neighborsAlive(i, j)) {
                     case 0:
                     case 1:
@@ -64,7 +62,7 @@ public class Matrix {
         cells = newCells;
     }
 
-    public ArrayList<ArrayList<Cell>> getCells() {
+    public Cell[][] getCells() {
         return cells;
     }
 }

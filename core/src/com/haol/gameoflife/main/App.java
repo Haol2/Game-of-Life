@@ -1,7 +1,7 @@
-package com.haol.gameoflife;
+package com.haol.gameoflife.main;
 
-import com.haol.gameoflife.Model.*;
-import com.haol.gameoflife.View.*;
+import com.haol.gameoflife.model.*;
+import com.haol.gameoflife.view.*;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -11,29 +11,18 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class App extends ApplicationAdapter {
-	private int gridWidth;
-	private int gridHeight;
+	private final int gridWidth = 20;
+	private final int gridHeight = 20;
 	Model model;
 	View view;
 	SpriteBatch batch;
 	Texture texture;
-	Pixmap pmap;
 
 	@Override
 	public void create () {
 		model = new Model(new Matrix(gridWidth, gridHeight));
-		view = new View(model, batch);
+		view = new View(gridWidth, gridHeight, model, batch);
 		batch = new SpriteBatch();
-		pmap = new Pixmap(800,1000, Pixmap.Format.RGBA8888);
-		pmap.setColor(Color.GOLD);
-		//pmap.fill();
-		pmap.drawCircle(200,200,100);
-		/*
-		for (int i = 0; i < 100; ++i) {
-			pmap.drawPixel(2,2, 12);
-		}
-*/
-		texture = new Texture(pmap);
 	}
 
 	@Override
@@ -46,12 +35,11 @@ public class App extends ApplicationAdapter {
 		model.step;
 		 */
 		view.draw(batch);
-		batch.draw(texture,1,1);
 		batch.end();
 	}
 	
 	@Override
 	public void dispose () {
-		pmap.dispose();
+		batch.dispose();
 	}
 }

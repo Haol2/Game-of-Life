@@ -1,4 +1,4 @@
-package com.haol.gameoflife.Model;
+package com.haol.gameoflife.model;
 
 public class Model {
     private Matrix matrix;
