@@ -1,7 +1,7 @@
 package com.haol.gameoflife;
 
-import Model.*;
-import View.*;
+import com.haol.gameoflife.Model.*;
+import com.haol.gameoflife.View.*;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -14,6 +14,7 @@ public class App extends ApplicationAdapter {
 	private int gridWidth;
 	private int gridHeight;
 	Model model;
+	View view;
 	SpriteBatch batch;
 	Texture texture;
 	Pixmap pmap;
@@ -21,6 +22,7 @@ public class App extends ApplicationAdapter {
 	@Override
 	public void create () {
 		model = new Model(new Matrix(gridWidth, gridHeight));
+		view = new View(model, batch);
 		batch = new SpriteBatch();
 		pmap = new Pixmap(800,1000, Pixmap.Format.RGBA8888);
 		pmap.setColor(Color.GOLD);
@@ -43,6 +45,7 @@ public class App extends ApplicationAdapter {
 		wenn neuer step:
 		model.step;
 		 */
+		view.draw(batch);
 		batch.draw(texture,1,1);
 		batch.end();
 	}

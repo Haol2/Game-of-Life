@@ -1,4 +1,4 @@
-package Model;
+package com.haol.gameoflife.Model;
 
 import java.util.ArrayList;
 
