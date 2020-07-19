@@ -3,23 +3,20 @@ package com.haol.gameoflife.Model;
 import java.util.ArrayList;
 
 public class Matrix {
-    private ArrayList<ArrayList<Cell>> cells;
+    private Cell[][] cells;
 
     public Matrix(int x, int y) {
-        cells = new ArrayList<ArrayList<Cell>>(y);
-        for (ArrayList<Cell> i : cells) i = new ArrayList<Cell>(x);
+        cells = new Cell[y][x];
     }
 
     public int neighborsAlive(int x, int y) {
         int n = 0;
-        int sizex = cells.get(0).size();
-        int sizey = cells.size();
 
         for (int i = x-1; i <= x+1; i++) {
             for (int j = y-1; j <= y+1; j++) {
-                if (!(i < 0 && j < 0 && i > sizex-1 && j > sizey-1)) {
+                if (!(i < 0 && j < 0 && i > cells[0].length-1 && j > cells.length-1)) {
                     if (!(i == x && j == y)) {
-                        if (cells.get(j).get(i).isAlive()) n++;
+                        if (cells[j][i].isAlive()) n++;
                     }
                 }
             }
@@ -36,9 +33,10 @@ public class Matrix {
          4.Lebende Zellen mit mehr als drei lebenden Nachbarn sterben in der Folgegeneration an Überbevölkerung.
          */
         Cell current;
-        for (int i = 0; i < cells.size(); i++) {
-            for (int j = 0; i < cells.get(0).size(); j++) {
-                current = cells.get(i).get(j);
+        Cell[][] newCells = cells;
+        for (int i = 0; i < cells.length; i++) {
+            for (int j = 0; i < cells[0].length; j++) {
+                current = newCells[j][i]);
                 switch (neighborsAlive(i, j)) {
                     case 0:
                     case 1:
@@ -63,6 +61,7 @@ public class Matrix {
                 }
             }
         }
+        cells = newCells;
     }
 
     public ArrayList<ArrayList<Cell>> getCells() {
