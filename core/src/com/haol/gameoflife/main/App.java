@@ -11,8 +11,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class App extends ApplicationAdapter {
-	private final int gridWidth = 20;
-	private final int gridHeight = 20;
+	private int gridWidth = 30;
+	private int gridHeight = 60;
+	private final double tileWidth = 60;
+	private final double tileHeight = 60;
 	Model model;
 	View view;
 	SpriteBatch batch;
@@ -21,7 +23,9 @@ public class App extends ApplicationAdapter {
 	@Override
 	public void create () {
 		model = new Model(new Matrix(gridWidth, gridHeight));
-		view = new View(gridWidth, gridHeight, model, batch);
+		gridWidth = (int)(Gdx.graphics.getWidth()/tileWidth);
+		gridHeight = (int)(Gdx.graphics.getHeight()/tileHeight);
+		view = new View(gridWidth, gridHeight, tileWidth, tileHeight, model, batch);
 		batch = new SpriteBatch();
 	}
 
