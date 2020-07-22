@@ -85,5 +85,6 @@ public class App extends ApplicationAdapter {
 	public void dispose () {
 		batch.dispose();
 		stage.dispose();
+		view.dispose();
 	}
 }
