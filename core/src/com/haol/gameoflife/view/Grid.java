@@ -79,7 +79,7 @@ public class Grid {
                     buttons[j][i].addListener(new ClickListener() {
                         @Override
                         public void clicked(InputEvent event, float x, float y) {
-
+                            ((ImageButton)event.getRelatedActor()).toggle();
                         }
                     });
                     //table.add(buttons[j][i]);
