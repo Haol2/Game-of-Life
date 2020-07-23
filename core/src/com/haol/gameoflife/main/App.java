@@ -46,7 +46,7 @@ public class App extends ApplicationAdapter {
 		button = new ImageButton(drawable);
 
 		gridWidth = (int)(stage.getWidth()/tileWidth);
-		gridHeight = (int)(stage.getHeight()/tileHeight);
+		gridHeight = (int)(stage.getHeight()/tileHeight*0.6);
 		view = new View(gridWidth, gridHeight, tileWidth, tileHeight, model);
 
 		Gdx.input.setInputProcessor(stage);

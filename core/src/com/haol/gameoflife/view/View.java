@@ -33,12 +33,19 @@ public class View implements Disposable {
     public void addGrid(Stage stage) {
         //stage.addActor(grid.table);
 
+        /*
         for (Button[] row: grid.buttons) {
             for (Button col: row) {
                 stage.addActor(col);
             }
         }
+*/
 
+        for (Image[] row: grid.images) {
+            for (Image col: row) {
+                stage.addActor(col);
+            }
+        }
 
         //grid.table.setPosition(0, stage.getHeight()/2);
         /*
