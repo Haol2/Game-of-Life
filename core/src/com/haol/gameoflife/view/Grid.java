@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -20,7 +21,7 @@ public class Grid {
     private int gridWidth;
     private int gridHeight;
 
-    Table table;
+    Stage stage;
     Texture textureBlack;
     Texture textureWhite;
     TextureRegion regionWhite;
@@ -38,11 +39,12 @@ public class Grid {
     int row = 0;
     int col = 0;
 
-    public Grid(int gridWidth, int gridHeight, float tileWidth, float tileHeight) {
+    public Grid(int gridWidth, int gridHeight, float tileWidth, float tileHeight, Stage stage) {
         this.tileHeight = tileHeight;
         this.tileWidth = tileWidth;
         this.gridHeight = gridHeight;
         this.gridWidth = gridWidth;
+        this.stage = stage;
 
         textureBlack = new Texture("cell_black.png");
         textureWhite = new Texture("cell_white.png");
@@ -63,7 +65,6 @@ public class Grid {
 
         buttons = new ImageButton[gridHeight][gridWidth];
         images = new Image[gridHeight][gridWidth];
-        table = new Table();
 
         createGrid();
     }

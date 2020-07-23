@@ -1,10 +1,19 @@
 package com.haol.gameoflife.model;
 
+import com.haol.gameoflife.view.View;
+
 public class Matrix {
     private Cell[][] cells;
+    private View view;
 
-    public Matrix(int x, int y) {
-        cells = new Cell[y][x];
+    public Matrix(int height, int width, View view) {
+        cells = new Cell[height][width];
+        for (Cell[] row: cells) {
+            for (Cell col: row) {
+                col = new Cell(false);
+            }
+        }
+        this.view = view;
     }
 
     public int neighborsAlive(int x, int y) {
@@ -30,6 +39,7 @@ public class Matrix {
          3.Eine lebende Zelle mit zwei oder drei lebenden Nachbarn bleibt in der Folgegeneration am Leben.
          4.Lebende Zellen mit mehr als drei lebenden Nachbarn sterben in der Folgegeneration an Überbevölkerung.
          */
+        // Todo: View ändern bei Änderung des Modells
         Cell current;
         Cell[][] newCells = cells;
         for (int i = 0; i < cells.length; i++) {

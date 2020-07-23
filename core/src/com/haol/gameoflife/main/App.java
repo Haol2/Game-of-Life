@@ -25,19 +25,22 @@ public class App extends ApplicationAdapter {
 	private int gridWidth = 1;
 	private int gridHeight = 1;
 
-	Stage stage;
-	Model model;
-	View view;
-	SpriteBatch batch;
-	Button button;
-	BitmapFont font;
-	Drawable drawable;
-	TextureRegion region;
+	private OrthographicCamera camera;
+	private Stage stage;
+	private Model model;
+	private View view;
+	private SpriteBatch batch;
+	private Button button;
+	private BitmapFont font;
+	private Drawable drawable;
+	private TextureRegion region;
 
 	@Override
 	public void create () {
+		camera = new OrthographicCamera();
+		camera.setToOrtho(false, 800, 480);
 		stage = new Stage();
-		model = new Model(new Matrix(gridWidth, gridHeight));
+		model = new Model(gridWidth, gridHeight, view);
 
 		batch = new SpriteBatch();
 		font = new BitmapFont();
@@ -47,14 +50,14 @@ public class App extends ApplicationAdapter {
 
 		gridWidth = (int)(stage.getWidth()/tileWidth);
 		gridHeight = (int)(stage.getHeight()/tileHeight*0.6);
-		view = new View(gridWidth, gridHeight, tileWidth, tileHeight, model);
+		view = new View(gridWidth, gridHeight, tileWidth, tileHeight, model, stage);
 
 		Gdx.input.setInputProcessor(stage);
-		//view.addActors(stage);
+
 		//button.setPosition(stage.getWidth()/2, stage.getHeight()/2);
 		//button.setSize(500,500);
 
-		view.addGrid(stage);
+		view.addGrid();
 		//stage.addActor(button);
 		//stage.addActor(textbutton);
 	}
