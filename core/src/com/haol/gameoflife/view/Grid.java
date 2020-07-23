@@ -141,8 +141,24 @@ public class Grid {
 
         @Override
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-            ((Image)actor).setDrawable(drawableWhite);
+            toggleBlackWhite((Image)actor);
             return true;
+        }
+    }
+
+    public void setBlack(int row, int col) {
+        images[row][col].setDrawable(drawableBlack);
+    }
+
+    public void setWhite(int row, int col) {
+        images[row][col].setDrawable(drawableWhite);
+    }
+
+    public void toggleBlackWhite(Image image) {
+        if (image.getDrawable().equals(drawableBlack)) {
+            image.setDrawable(drawableWhite);
+        } else {
+            image.setDrawable(drawableBlack);
         }
     }
 

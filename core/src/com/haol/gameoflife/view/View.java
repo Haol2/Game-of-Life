@@ -67,6 +67,13 @@ public class View implements Disposable {
         });
     }
 
+    public void setBlack(int row, int col) {
+        grid.setBlack(row, col);
+    }
+
+    public void setWhite(int row, int col) {
+        grid.setWhite(row, col);
+    }
 
     public void addGrid() {
         //stage.addActor(grid.table);

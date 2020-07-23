@@ -4,26 +4,30 @@ import com.haol.gameoflife.view.View;
 
 public class Matrix {
     private Cell[][] cells;
+    private Cell[][] newCells;
     private View view;
 
     public Matrix(int height, int width, View view) {
         cells = new Cell[height][width];
-        for (Cell[] row: cells) {
-            for (Cell col: row) {
-                col = new Cell(false);
+        newCells = new Cell[height][width];
+        for (int row = 0; row < height; row++) {
+            for (int col = 0; col < width; col++) {
+                cells[row][col] = new Cell(false);
             }
         }
         this.view = view;
     }
 
-    public int neighborsAlive(int x, int y) {
+    public int neighborsAlive(int row, int col) {
         int n = 0;
 
-        for (int i = x-1; i <= x+1; i++) {
-            for (int j = y-1; j <= y+1; j++) {
-                if (!(i < 0 && j < 0 && i > cells[0].length-1 && j > cells.length-1)) {
-                    if (!(i == x && j == y)) {
-                        if (cells[j][i].isAlive()) n++;
+        for (int i = row-1; i <= row+1; i++) {
+            for (int j = col-1; j <= col+1; j++) {
+                if (!(i < 0) && !(j < 0)) {
+                    if(!(i >= cells.length) && !(j >= cells[0].length)) {
+                        if (!(i == row && j == col)) {
+                            if (cells[row][col].isAlive()) n++; //indexoutofBoudn
+                        }
                     }
                 }
             }
@@ -41,11 +45,11 @@ public class Matrix {
          */
         // Todo: View ändern bei Änderung des Modells
         Cell current;
-        Cell[][] newCells = cells;
-        for (int i = 0; i < cells.length; i++) {
-            for (int j = 0; i < cells[0].length; j++) {
-                current = newCells[j][i];
-                switch (neighborsAlive(i, j)) { //indexoutofBounds
+        newCells = cells.clone();
+        for (int row = 0; row < cells.length; row++) {
+            for (int col = 0; col < cells[0].length; col++) {
+                current = newCells[row][col];
+                switch (neighborsAlive(row, col)) {
                     case 0:
                     case 1:
                         current.setDead();
