@@ -1,17 +1,18 @@
 package com.haol.gameoflife.view;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Disposable;
 import com.haol.gameoflife.model.*;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 
 public class View implements Disposable {
     private float tileHeight;
@@ -24,6 +25,7 @@ public class View implements Disposable {
     private TextButton buttonOneStep;
     private TextButton buttonTenSteps;
     private Stage stage;
+    private Skin skin;
 
     public View(int gridWidth, int gridHeight, float tileWidth, float tileHeight, Model model, Stage stage) {
         this.tileHeight = tileHeight;
@@ -35,11 +37,36 @@ public class View implements Disposable {
         this.model = model;
         this.grid = new Grid(gridWidth, gridHeight, tileWidth, tileHeight, stage);
 
+        this.skin = new Skin(Gdx.files.internal("default/skin/uiskin.json"));
+
+        this.buttonOneStep = new TextButton("1 Step", skin);
+        this.buttonTenSteps = new TextButton("10 Steps", skin);
+        setupButtons();
+
+    }
+
+    public void setupButtons() {
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
         style.font = new BitmapFont();
-        this.buttonOneStep = new TextButton("1 Step", style);
-        this.buttonTenSteps = new TextButton("10 Steps", style);
+        buttonOneStep.setPosition(100, 500);
+        buttonTenSteps.setPosition(100, 100);
+        buttonOneStep.setSize(400, 200);
+        buttonTenSteps.setSize(400, 200);
+
+        buttonOneStep.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                model.step(1);
+            }
+        });
+        buttonTenSteps.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                model.step(10);
+            }
+        });
     }
+
 
     public void addGrid() {
         //stage.addActor(grid.table);
@@ -70,10 +97,6 @@ public class View implements Disposable {
     }
 
     public void addButtons() {
-        buttonOneStep.setPosition(0,stage.getHeight()-100);
-        buttonTenSteps.setPosition(stage.getWidth()-100, stage.getHeight()-100);
-        buttonOneStep.setSize(100, 50);
-        buttonTenSteps.setSize(100, 50);
         stage.addActor(buttonOneStep);
         stage.addActor(buttonTenSteps);
     }

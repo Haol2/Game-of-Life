@@ -45,7 +45,7 @@ public class Matrix {
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; i < cells[0].length; j++) {
                 current = newCells[j][i];
-                switch (neighborsAlive(i, j)) {
+                switch (neighborsAlive(i, j)) { //indexoutofBounds
                     case 0:
                     case 1:
                         current.setDead();

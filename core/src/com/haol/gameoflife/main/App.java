@@ -58,6 +58,7 @@ public class App extends ApplicationAdapter {
 		//button.setSize(500,500);
 
 		view.addGrid();
+		view.addButtons();
 		//stage.addActor(button);
 		//stage.addActor(textbutton);
 	}
