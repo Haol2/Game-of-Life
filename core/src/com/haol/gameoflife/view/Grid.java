@@ -96,7 +96,8 @@ public class Grid {
 */
                 current = images[row][col];
                 images[row][col] = new Image(drawableBlack);
-                images[row][col].setPosition(col*tileWidth, row*tileHeight);
+                //images[row][col].setPosition(col*tileWidth, row*tileHeight);
+                images[row][col].setPosition(col*tileWidth, stage.getHeight() - ((row+1)*tileHeight));
                 //System.out.println(col*tileWidth + ", " + row*tileHeight);
                 current = images[row][col];
                 current.addListener(new MyListener(current));
