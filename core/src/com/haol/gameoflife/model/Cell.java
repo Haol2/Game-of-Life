@@ -18,4 +18,8 @@ public class Cell {
     public boolean isAlive() {
         return isAlive;
     }
+
+    public void toggleState() {
+        isAlive = !isAlive;
+    }
 }

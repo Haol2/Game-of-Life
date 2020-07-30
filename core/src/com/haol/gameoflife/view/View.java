@@ -35,7 +35,7 @@ public class View implements Disposable {
         this.stage = stage;
 
         this.model = model;
-        this.grid = new Grid(gridWidth, gridHeight, tileWidth, tileHeight, stage);
+        this.grid = new Grid(gridWidth, gridHeight, tileWidth, tileHeight, stage, model);
 
         this.skin = new Skin(Gdx.files.internal("default/skin/uiskin.json"));
 
@@ -43,6 +43,47 @@ public class View implements Disposable {
         this.buttonTenSteps = new TextButton("10 Steps", skin);
         setupButtons();
 
+    }
+
+    public void setTileHeight(float tileHeight) {
+        this.tileHeight = tileHeight;
+    }
+
+    public void setTileWidth(float tileWidth) {
+        this.tileWidth = tileWidth;
+    }
+
+    public void setGridWidth(int gridWidth) {
+        this.gridWidth = gridWidth;
+    }
+
+    public void setGridHeight(int gridHeight) {
+        this.gridHeight = gridHeight;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
+        grid.model = model;
+    }
+
+    public void setGrid(Grid grid) {
+        this.grid = grid;
+    }
+
+    public void setButtonOneStep(TextButton buttonOneStep) {
+        this.buttonOneStep = buttonOneStep;
+    }
+
+    public void setButtonTenSteps(TextButton buttonTenSteps) {
+        this.buttonTenSteps = buttonTenSteps;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public void setSkin(Skin skin) {
+        this.skin = skin;
     }
 
     public void setupButtons() {
@@ -53,7 +94,14 @@ public class View implements Disposable {
         buttonOneStep.setSize(400, 200);
         buttonTenSteps.setSize(400, 200);
 
+/*
+        buttonOneStep.setPosition(100, 100);
+        buttonTenSteps.setPosition(300, 100);
+        buttonOneStep.setSize(200, 100);
+        buttonTenSteps.setSize(200, 100);
+        */
         buttonOneStep.addListener(new ClickListener(){
+
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 model.step(1);
@@ -114,4 +162,43 @@ public class View implements Disposable {
         grid.textureWhite.dispose();
     }
 
+    public float getTileHeight() {
+        return tileHeight;
+    }
+
+    public float getTileWidth() {
+        return tileWidth;
+    }
+
+    public int getGridWidth() {
+        return gridWidth;
+    }
+
+    public int getGridHeight() {
+        return gridHeight;
+    }
+
+    public Model getModel() {
+        return model;
+    }
+
+    public Grid getGrid() {
+        return grid;
+    }
+
+    public TextButton getButtonOneStep() {
+        return buttonOneStep;
+    }
+
+    public TextButton getButtonTenSteps() {
+        return buttonTenSteps;
+    }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public Skin getSkin() {
+        return skin;
+    }
 }

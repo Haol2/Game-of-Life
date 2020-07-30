@@ -14,6 +14,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.haol.gameoflife.model.Model;
+
+import javax.sound.midi.SysexMessage;
 
 public class Grid {
     private float tileHeight;
@@ -22,6 +25,7 @@ public class Grid {
     private int gridHeight;
 
     Stage stage;
+    Model model;
     Texture textureBlack;
     Texture textureWhite;
     TextureRegion regionWhite;
@@ -39,12 +43,13 @@ public class Grid {
     int row = 0;
     int col = 0;
 
-    public Grid(int gridWidth, int gridHeight, float tileWidth, float tileHeight, Stage stage) {
+    public Grid(int gridWidth, int gridHeight, float tileWidth, float tileHeight, Stage stage, Model model) {
         this.tileHeight = tileHeight;
         this.tileWidth = tileWidth;
         this.gridHeight = gridHeight;
         this.gridWidth = gridWidth;
         this.stage = stage;
+        this.model = model;
 
         textureBlack = new Texture("cell_black.png");
         textureWhite = new Texture("cell_white.png");
@@ -100,7 +105,7 @@ public class Grid {
                 images[row][col].setPosition(col*tileWidth, stage.getHeight() - ((row+1)*tileHeight));
                 //System.out.println(col*tileWidth + ", " + row*tileHeight);
                 current = images[row][col];
-                current.addListener(new MyListener(current));
+                current.addListener(new MyListener(current, row, col));
 
                 /*
                 images[row][col].addListener(new ClickListener() {
@@ -131,17 +136,88 @@ public class Grid {
         }
     }
 
+    public float getTileHeight() {
+        return tileHeight;
+    }
+
+    public float getTileWidth() {
+        return tileWidth;
+    }
+
+    public int getGridWidth() {
+        return gridWidth;
+    }
+
+    public int getGridHeight() {
+        return gridHeight;
+    }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public Texture getTextureBlack() {
+        return textureBlack;
+    }
+
+    public Texture getTextureWhite() {
+        return textureWhite;
+    }
+
+    public TextureRegion getRegionWhite() {
+        return regionWhite;
+    }
+
+    public TextureRegion getRegionBlack() {
+        return regionBlack;
+    }
+
+    public TextureRegionDrawable getDrawableBlack() {
+        return drawableBlack;
+    }
+
+    public TextureRegionDrawable getDrawableWhite() {
+        return drawableWhite;
+    }
+
+    public ImageButton[][] getButtons() {
+        return buttons;
+    }
+
+    public ImageButton.ImageButtonStyle getStyle() {
+        return style;
+    }
+
+    public Image[][] getImages() {
+        return images;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
     public class MyListener extends InputListener {
         private Actor actor;
+        private int row;
+        private int col;
 
-        public MyListener(Actor actor) {
+        public MyListener(Actor actor, int row, int col) {
             super();
             this.actor = actor;
+            this.row = row;
+            this.col = col;
         }
 
         @Override
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+
             toggleBlackWhite((Image)actor);
+            model.getMatrix().getCells()[row][col].toggleState();
+
             return true;
         }
     }

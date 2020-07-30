@@ -6,8 +6,8 @@ public class Model {
     private Matrix matrix;
     private View view;
 
-    public Model(int height, int width, View view) {
-        matrix = new Matrix(height, width, view);
+    public Model(int width, int height, View view) {
+        matrix = new Matrix(width, height, view);
         this.view = view;
     }
 
@@ -29,5 +29,13 @@ public class Model {
 
     public Matrix getMatrix() {
         return matrix;
+    }
+
+    public View getView() {
+        return view;
+    }
+
+    public void setView(View view) {
+        this.view = view;
     }
 }

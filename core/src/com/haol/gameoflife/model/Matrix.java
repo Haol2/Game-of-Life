@@ -7,7 +7,7 @@ public class Matrix {
     private Cell[][] newCells;
     private View view;
 
-    public Matrix(int height, int width, View view) {
+    public Matrix(int width, int height, View view) {
         cells = new Cell[height][width];
         newCells = new Cell[height][width];
         for (int row = 0; row < height; row++) {
@@ -26,13 +26,14 @@ public class Matrix {
                 if (!(i < 0) && !(j < 0)) {
                     if(!(i >= cells.length) && !(j >= cells[0].length)) {
                         if (!(i == row && j == col)) {
-                            if (cells[row][col].isAlive()) n++; //indexoutofBoudn
+                            if (cells[i][j].isAlive()) {
+                                n++;
+                            }
                         }
                     }
                 }
             }
         }
-
         return n;
     }
 
@@ -44,6 +45,14 @@ public class Matrix {
          4.Lebende Zellen mit mehr als drei lebenden Nachbarn sterben in der Folgegeneration an Überbevölkerung.
          */
         // Todo: View ändern bei Änderung des Modells
+
+        for (int row = 0; row < cells.length; row++) {
+            for (int col = 0; col < cells[0].length; col++) {
+                System.out.print(cells[row][col].isAlive());
+            }
+            System.out.println("");
+        }
+
         Cell current;
         newCells = cells.clone();
         for (int row = 0; row < cells.length; row++) {
@@ -53,12 +62,14 @@ public class Matrix {
                     case 0:
                     case 1:
                         current.setDead();
+                        view.getGrid().setBlack(row, col);
                         break;
                     case 2:
                         break;
                     case 3:
                         if (!current.isAlive()) {
                             current.setAlive();
+                            view.getGrid().setWhite(row, col);
                         }
                         break;
                     case 4:
@@ -68,6 +79,7 @@ public class Matrix {
                     case 8:
                         if (current.isAlive()) {
                             current.setDead();
+                            view.getGrid().setBlack(row, col);
                         }
                         break;
                 }

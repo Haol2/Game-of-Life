@@ -40,17 +40,18 @@ public class App extends ApplicationAdapter {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 800, 480);
 		stage = new Stage();
+
+		gridWidth = (int)(stage.getWidth()/tileWidth);
+		gridHeight = (int)(stage.getHeight()/tileHeight*0.6);
+		view = new View(gridWidth, gridHeight, tileWidth, tileHeight, model, stage);
 		model = new Model(gridWidth, gridHeight, view);
+		view.setModel(model);
 
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 		region = new TextureRegion(new Texture("badlogic.jpg"),0,0,55,55);
 		drawable = new TextureRegionDrawable(region);
 		button = new ImageButton(drawable);
-
-		gridWidth = (int)(stage.getWidth()/tileWidth);
-		gridHeight = (int)(stage.getHeight()/tileHeight*0.6);
-		view = new View(gridWidth, gridHeight, tileWidth, tileHeight, model, stage);
 
 		Gdx.input.setInputProcessor(stage);
 
