@@ -24,6 +24,9 @@ public class View implements Disposable {
     private Grid grid;
     private TextButton buttonOneStep;
     private TextButton buttonTenSteps;
+    private TextButton buttonClear;
+    private TextButton buttonStart;
+
     private Stage stage;
     private Skin skin;
 
@@ -41,6 +44,8 @@ public class View implements Disposable {
 
         this.buttonOneStep = new TextButton("1 Step", skin);
         this.buttonTenSteps = new TextButton("10 Steps", skin);
+        this.buttonClear = new TextButton("Clear", skin);
+        this.buttonStart = new TextButton("Start", skin);
         setupButtons();
 
     }
@@ -89,10 +94,15 @@ public class View implements Disposable {
     public void setupButtons() {
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
         style.font = new BitmapFont();
+
         buttonOneStep.setPosition(100, 500);
-        buttonTenSteps.setPosition(100, 100);
         buttonOneStep.setSize(400, 200);
+        buttonTenSteps.setPosition(100, 100);
         buttonTenSteps.setSize(400, 200);
+        buttonClear.setPosition(500, 100);
+        buttonClear.setSize(400, 200);
+        buttonStart.setPosition(500, 500);
+        buttonStart.setSize(400, 200);
 
 /*
         buttonOneStep.setPosition(100, 100);
@@ -108,6 +118,19 @@ public class View implements Disposable {
             }
         });
         buttonTenSteps.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                model.step(10);
+            }
+        });
+        buttonClear.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                model.reset();
+                grid.reset();
+            }
+        });
+        buttonStart.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 model.step(10);
@@ -154,6 +177,8 @@ public class View implements Disposable {
     public void addButtons() {
         stage.addActor(buttonOneStep);
         stage.addActor(buttonTenSteps);
+        stage.addActor(buttonClear);
+        stage.addActor(buttonStart);
     }
 
     @Override

@@ -46,12 +46,14 @@ public class Matrix {
          */
         // Todo: View ändern bei Änderung des Modells
 
+        /*
         for (int row = 0; row < cells.length; row++) {
             for (int col = 0; col < cells[0].length; col++) {
                 System.out.print(cells[row][col].isAlive());
             }
             System.out.println("");
         }
+*/
 
         Cell current;
         newCells = cells.clone();
@@ -86,6 +88,14 @@ public class Matrix {
             }
         }
         cells = newCells;
+    }
+
+    public void reset() {
+        for (int row = 0; row < cells.length; row++) {
+            for (int col = 0; col < cells[0].length; col++) {
+                cells[row][col].setDead();
+            }
+        }
     }
 
     public Cell[][] getCells() {

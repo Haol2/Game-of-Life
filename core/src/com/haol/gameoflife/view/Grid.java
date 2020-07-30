@@ -238,4 +238,12 @@ public class Grid {
         }
     }
 
+    public void reset() {
+        for (row = 0; row < gridHeight; ++row) {
+            for (col = 0; col < gridWidth; ++col) {
+                setBlack(row, col);
+            }
+        }
+    }
+
 }
