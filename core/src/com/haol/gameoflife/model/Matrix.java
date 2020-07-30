@@ -57,33 +57,30 @@ public class Matrix {
 
         Cell current;
         newCells = cells.clone();
+        int neighborsAlive = 0;
+
         for (int row = 0; row < cells.length; row++) {
             for (int col = 0; col < cells[0].length; col++) {
                 current = newCells[row][col];
-                switch (neighborsAlive(row, col)) {
-                    case 0:
-                    case 1:
+                neighborsAlive = neighborsAlive(row, col);
+
+                if (cells[row][col].isAlive()) {
+                    if (neighborsAlive < 2) {
                         current.setDead();
                         view.getGrid().setBlack(row, col);
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        if (!current.isAlive()) {
-                            current.setAlive();
-                            view.getGrid().setWhite(row, col);
-                        }
-                        break;
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 7:
-                    case 8:
-                        if (current.isAlive()) {
-                            current.setDead();
-                            view.getGrid().setBlack(row, col);
-                        }
-                        break;
+                    } else if ((neighborsAlive == 2) || (neighborsAlive == 3)) {
+                        current.setAlive();
+                        view.getGrid().setWhite(row, col);
+                    } else {
+                        current.setDead();
+                        view.getGrid().setBlack(row, col);
+                    }
+
+                } else {
+                    if (neighborsAlive == 3) {
+                        current.setAlive();
+                        view.getGrid().setWhite(row, col);
+                    }
                 }
             }
         }

@@ -131,9 +131,15 @@ public class View implements Disposable {
             }
         });
         buttonStart.addListener(new ClickListener(){
+            private boolean running = false;
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                model.step(10);
+                while (true) {
+                    model.step(1);
+                    try {
+                        wait(1);
+                    } catch (InterruptedException e) {}
+                }
             }
         });
     }
