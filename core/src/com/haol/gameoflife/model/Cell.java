@@ -19,6 +19,9 @@ public class Cell {
         return isAlive;
     }
 
+    /**
+     * toggles the state of the cell
+     */
     public void toggleState() {
         isAlive = !isAlive;
     }

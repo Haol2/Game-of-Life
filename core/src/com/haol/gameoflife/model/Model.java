@@ -15,6 +15,10 @@ public class Model {
         this.matrix = matrix;
     }
 
+    /**
+     * executes a step for amount times
+     * @param amount
+     */
     public void step(int amount) {
         int i = 0;
         while (i < amount) {
@@ -39,6 +43,9 @@ public class Model {
         this.view = view;
     }
 
+    /**
+     * resetting the model
+     */
     public void reset() {
         this.matrix.reset();
     }

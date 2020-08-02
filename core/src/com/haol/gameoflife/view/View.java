@@ -50,47 +50,6 @@ public class View implements Disposable {
 
     }
 
-    public void setTileHeight(float tileHeight) {
-        this.tileHeight = tileHeight;
-    }
-
-    public void setTileWidth(float tileWidth) {
-        this.tileWidth = tileWidth;
-    }
-
-    public void setGridWidth(int gridWidth) {
-        this.gridWidth = gridWidth;
-    }
-
-    public void setGridHeight(int gridHeight) {
-        this.gridHeight = gridHeight;
-    }
-
-    public void setModel(Model model) {
-        this.model = model;
-        grid.model = model;
-    }
-
-    public void setGrid(Grid grid) {
-        this.grid = grid;
-    }
-
-    public void setButtonOneStep(TextButton buttonOneStep) {
-        this.buttonOneStep = buttonOneStep;
-    }
-
-    public void setButtonTenSteps(TextButton buttonTenSteps) {
-        this.buttonTenSteps = buttonTenSteps;
-    }
-
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
-
-    public void setSkin(Skin skin) {
-        this.skin = skin;
-    }
-
     public void setupButtons() {
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
         style.font = new BitmapFont();
@@ -153,31 +112,11 @@ public class View implements Disposable {
     }
 
     public void addGrid() {
-        //stage.addActor(grid.table);
-
-        /*
-        for (Button[] row: grid.buttons) {
-            for (Button col: row) {
-                stage.addActor(col);
-            }
-        }
-*/
-
         for (Image[] row: grid.images) {
             for (Image col: row) {
                 stage.addActor(col);
             }
         }
-
-        //grid.table.setPosition(0, stage.getHeight()/2);
-        /*
-        for (Image[] row : grid.images) {
-            for (Image col: row) {
-                stage.addActor(col);
-            }
-        }
-
-         */
     }
 
     public void addButtons() {
@@ -231,5 +170,46 @@ public class View implements Disposable {
 
     public Skin getSkin() {
         return skin;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
+        grid.model = model;
+    }
+
+    public void setTileHeight(float tileHeight) {
+        this.tileHeight = tileHeight;
+    }
+
+    public void setTileWidth(float tileWidth) {
+        this.tileWidth = tileWidth;
+    }
+
+    public void setGridWidth(int gridWidth) {
+        this.gridWidth = gridWidth;
+    }
+
+    public void setGridHeight(int gridHeight) {
+        this.gridHeight = gridHeight;
+    }
+
+    public void setGrid(Grid grid) {
+        this.grid = grid;
+    }
+
+    public void setButtonOneStep(TextButton buttonOneStep) {
+        this.buttonOneStep = buttonOneStep;
+    }
+
+    public void setButtonTenSteps(TextButton buttonTenSteps) {
+        this.buttonTenSteps = buttonTenSteps;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public void setSkin(Skin skin) {
+        this.skin = skin;
     }
 }

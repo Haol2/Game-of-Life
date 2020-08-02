@@ -18,6 +18,12 @@ public class Matrix {
         this.view = view;
     }
 
+    /**
+     *
+     * @param row
+     * @param col
+     * @return number of neighbors of a cell that are alive
+     */
     public int neighborsAlive(int row, int col) {
         int n = 0;
 
@@ -37,15 +43,10 @@ public class Matrix {
         return n;
     }
 
+    /**
+     * calculates the next state of the cells and changes colors accordingly
+     */
     public void step() {
-        /*
-         1.Eine tote Zelle mit genau drei lebenden Nachbarn wird in der Folgegeneration neu geboren.
-         2.Lebende Zellen mit weniger als zwei lebenden Nachbarn sterben in der Folgegeneration an Einsamkeit.
-         3.Eine lebende Zelle mit zwei oder drei lebenden Nachbarn bleibt in der Folgegeneration am Leben.
-         4.Lebende Zellen mit mehr als drei lebenden Nachbarn sterben in der Folgegeneration an Überbevölkerung.
-         */
-        // Todo: View ändern bei Änderung des Modells
-
         /*
         for (int row = 0; row < cells.length; row++) {
             for (int col = 0; col < cells[0].length; col++) {
@@ -54,7 +55,6 @@ public class Matrix {
             System.out.println("");
         }
 */
-
         Cell current;
         newCells = cells.clone();
         int neighborsAlive = 0;
@@ -64,29 +64,53 @@ public class Matrix {
                 current = newCells[row][col];
                 neighborsAlive = neighborsAlive(row, col);
 
-                if (cells[row][col].isAlive()) {
-                    if (neighborsAlive < 2) {
-                        current.setDead();
-                        view.getGrid().setBlack(row, col);
-                    } else if ((neighborsAlive == 2) || (neighborsAlive == 3)) {
-                        current.setAlive();
-                        view.getGrid().setWhite(row, col);
-                    } else {
-                        current.setDead();
-                        view.getGrid().setBlack(row, col);
-                    }
-
+                if (evaluateCell(cells[row][col].isAlive(), neighborsAlive)) {
+                    current.setAlive();
                 } else {
-                    if (neighborsAlive == 3) {
-                        current.setAlive();
-                        view.getGrid().setWhite(row, col);
-                    }
+                    current.setDead();
                 }
             }
         }
+
         cells = newCells;
+        setColors(cells);
     }
 
+    /**
+     *
+     * @param isAlive
+     * @param neighborsAlive
+     * @return true if cell will be alive and false if cell will be dead in the next generation
+     */
+    private boolean evaluateCell(boolean isAlive, int neighborsAlive) {
+        if (isAlive && neighborsAlive <= 1) return false; // Lonely
+        if (isAlive && neighborsAlive >= 2 && neighborsAlive <= 3) return true; // Lives
+        if (isAlive && neighborsAlive >= 4 && neighborsAlive <= 8) return false; // Overcrowded
+
+        if (!isAlive && neighborsAlive == 3) return true; // Birth
+        if (!isAlive && neighborsAlive != 3) return false; // Barren
+        return false;
+    }
+
+    /**
+     * set colors according to cells
+     * @param cells
+     */
+    private void setColors(Cell[][] cells) {
+        for (int row = 0; row < cells.length; row++) {
+            for (int col = 0; col < cells[0].length; col++) {
+                if (cells[row][col].isAlive()) {
+                    view.getGrid().setWhite(row, col);
+                } else {
+                    view.getGrid().setBlack(row, col);
+                }
+            }
+        }
+    }
+
+    /**
+     * resetting the cells
+     */
     public void reset() {
         for (int row = 0; row < cells.length; row++) {
             for (int col = 0; col < cells[0].length; col++) {
