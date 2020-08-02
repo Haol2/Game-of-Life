@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"com.haol.gameoflife.main"},{"l":"com.haol.gameoflife.model"},{"l":"com.haol.gameoflife.view"}]
