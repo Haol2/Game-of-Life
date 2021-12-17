@@ -13,6 +13,7 @@ public class Matrix {
         for (int row = 0; row < height; row++) {
             for (int col = 0; col < width; col++) {
                 cells[row][col] = new Cell(false);
+                newCells[row][col] = new Cell(false);
             }
         }
         this.view = view;
@@ -55,19 +56,16 @@ public class Matrix {
             System.out.println("");
         }
 */
-        Cell current;
-        newCells = cells.clone();
         int neighborsAlive = 0;
 
         for (int row = 0; row < cells.length; row++) {
             for (int col = 0; col < cells[0].length; col++) {
-                current = newCells[row][col];
                 neighborsAlive = neighborsAlive(row, col);
 
                 if (evaluateCell(cells[row][col].isAlive(), neighborsAlive)) {
-                    current.setAlive();
+                    newCells[row][col].setAlive();
                 } else {
-                    current.setDead();
+                    newCells[row][col].setDead();
                 }
             }
         }

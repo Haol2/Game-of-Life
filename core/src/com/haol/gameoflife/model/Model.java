@@ -5,14 +5,20 @@ import com.haol.gameoflife.view.View;
 public class Model {
     private Matrix matrix;
     private View view;
+    private ModelTest test;
 
     public Model(int width, int height, View view) {
         matrix = new Matrix(width, height, view);
         this.view = view;
+        test = new ModelTest(new Matrix(3, 3, view));
     }
 
     public Model(Matrix matrix) {
         this.matrix = matrix;
+    }
+
+    public ModelTest getTest() {
+        return test;
     }
 
     /**

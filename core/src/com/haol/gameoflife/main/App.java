@@ -62,6 +62,8 @@ public class App extends ApplicationAdapter {
 		view.addButtons();
 		//stage.addActor(button);
 		//stage.addActor(textbutton);
+
+		//model.getTest().test();
 	}
 
 	@Override
